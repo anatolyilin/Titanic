@@ -197,10 +197,20 @@ plt.show()
 
 # %%
 # Print the classes of Fare = 0:
-print(dataset_train["Pclass"][dataset_train["Fare"] == 0 ])
+workingset = dataset_train[dataset_train["Fare"] == 0 ] 
+mean = [np.nan, dataset_train["Fare"][dataset_train["Pclass"] == 1 ].apply(lambda x: x if x>0 else np.nan).dropna().median() , dataset_train["Fare"][dataset_train["Pclass"] == 2 ].apply(lambda x: x if x>0 else np.nan).dropna().median(), dataset_train["Fare"][dataset_train["Pclass"] == 3 ].apply(lambda x: x if x>0 else np.nan).dropna().median()]
+workingset["Fare"] = workingset["Pclass"].apply(lambda x: mean[x]) 
 
+dataset_train.update(workingset)
+
+# %%
 # perhaps missing rows can be dropped? Let's analyze the test data:
-dataset_test.info()
+dataset_train.info()
+#  SibSp represents number of Brothers-Sisters or Wife-Husbands
+#  Parch represents number of Parents or Kids 
+
+
+
 
 #%%
 def preprocess(dataset):
