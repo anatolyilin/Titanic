@@ -123,7 +123,7 @@ dataset_train = ageDeNAN(dataset_train, "median", "Age")
 # %%
 dataset_train.info()
 # Cabin has a lot of missing data. Let's remove it
-dataset_train = dataset_train.iloc[:, [0,1,2,4,5,6,7,9,11]]
+dataset_train = dataset_train.iloc[:, [0,1,2,3, 4,5,6,7,9,11]]
 # %%
 dataset_train.info()
 # Embarked coloumn is incomplete. 
@@ -204,6 +204,12 @@ workingset["Fare"] = workingset["Pclass"].apply(lambda x: mean[x])
 dataset_train.update(workingset)
 
 # %%
+
+# 1. extract title 
+# 2. assume if it's mother/daughter
+# 
+
+
 # perhaps missing rows can be dropped? Let's analyze the test data:
 dataset_train.info()
 #  SibSp represents number of Brothers-Sisters or Wife-Husbands
